@@ -34,12 +34,11 @@ public class Product {
     }
 
 
-    public Product(Long id, String name, String description, Double price, String category, Set<Item> items) {
+    public Product(Long id, String name, String description, Double price, Set<Item> items) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-//        this.category = category;
         this.items = items;
     }
 
@@ -83,14 +82,6 @@ public class Product {
         this.items = items;
     }
 
-//    public String getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(String category) {
-//        this.category = category;
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -100,7 +91,6 @@ public class Product {
                 Objects.equals(name, product.name) &&
                 Objects.equals(description, product.description) &&
                 Objects.equals(price, product.price) &&
-//                Objects.equals(category, product.category) &&
                 Objects.equals(items, product.items);
     }
 
@@ -116,7 +106,6 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", category='"  + '\'' +
                 ", items=" + items +
                 '}';
     }

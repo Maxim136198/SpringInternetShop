@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>List Products</title>
-<!--    <link href="../../css/order_style.css" rel="stylesheet">-->
-    <link rel="stylesheet" href="bootstrap.min.css">
+
+    <link rel="stylesheet" href="order_style.css">
 </head>
 <body>
 
@@ -12,7 +12,7 @@
 
 <!--<h2 align="center"> List Products </h2>-->
 <div class="container">
-    <h1 class="display-4" align="center">List Product</h1>
+    <h1 class="display-4" align="center">List Product??? Лист продуктов </h1>
     <table class="table">
         <thead>
         <tr>
@@ -30,7 +30,7 @@
             <td><a th:text="${product.getName()}"> ProductName </a></td>
             <td><a th:text="${product.getDescription()}"> Description </a></td>
             <td><a th:text="${product.getPrice()}"> Price </a></td>
-            <td><a th:text="${product.getCategory()}"> Category </a></td>
+<!--            <td><a th:text="${product.getCategory()}"> Category </a></td>-->
 
 
 
@@ -64,11 +64,11 @@
     </table>
 
 
-    <table>
-        <th>
-            <form th:method="GET" th:action="@{/product/allProduct"
-        </th>
-    </table>
+<!--    <table>-->
+<!--        <th>-->
+<!--            <form th:method="GET" th:action="@{/product/allProduct"-->
+<!--        </th>-->
+<!--    </table>-->
 
 </div>
 <script src="bootstrap.bundle.min.js"></script>

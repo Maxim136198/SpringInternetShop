@@ -48,7 +48,7 @@ public class ProductControllerImpl implements ProductController {
     @PostMapping()
     public String saveProduct(@ModelAttribute("newProduct") Product product) {
         productService.save(product);
-        return "redirect:/product/allProduct";
+        return "redirect:/allProduct";
     }
 
     @GetMapping("/edit/{id}")

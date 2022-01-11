@@ -68,11 +68,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByName(name).orElseThrow(() -> new RuntimeException("error.product.name.notUnique"));
     }
 
-    @Override
-    public List<Product> findAllByCategory() {
-//        return productRepository.findAllByCategory();
-        return null;
-    }
+//    @Override
+//    public List<Product> findAllByCategory() {
+////        return productRepository.findAllByCategory();
+//        return null;
+//    }
 
 
     private void validate(boolean expression, String errorMessage) {
