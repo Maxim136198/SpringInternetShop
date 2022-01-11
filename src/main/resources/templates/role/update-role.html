@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Role</title>
+</head>
+<body>
+
+<div th:replace="header/header :: header"></div>
+<div>
+    <h1 align="center"> Edit Role </h1>
+    <form action="#" th:action="@{/role/update}" th:object="${role}" method="post">
+
+        <div>
+            <table>
+                <th>
+                <label for="id"> ID: </label>
+                <input readonly type="number" th:field="*{id}" id="id">
+                </th>
+
+                <th>
+                    <label for="roleName"> Name: </label>
+                    <input type="text" th:field="*{name}" id="roleName">
+                </th>
+            </table>
+        </div>
+        <input type="submit" value="Edit">
+    </form>
+</div>
+
+
+</body>
+</html>

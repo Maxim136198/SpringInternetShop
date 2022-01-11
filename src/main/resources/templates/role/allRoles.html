@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Roles</title>
+</head>
+<body>
+
+<div th:replace="header/header :: header"></div>
+
+<h2 align="center"> List Roles </h2>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th> ID</th>
+            <th> Name</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each=" role : ${allRoles} ">
+            <td><a th:text="${role.getId()}"> ID </a></td>
+            <td><a th:text="${role.getName()}"> UserName </a></td>
+
+            <td>
+                <form th:method="post" th:action="@{/role/{id}(id=${role.getId()})}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+
+            <td>
+                <form th:method="get" th:action="@{/role/edit/{id}(id=${role.id})}" th:object="${role}">
+                    <input type="submit" value="Edit">
+                </form>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <th>
+            <form th:method="GET" th:action="@{/}">
+                <input type="submit" value="Back">
+            </form>
+        </th>
+    </table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+</head>
+<body>
+<div th:replace="header/header :: header"></div>
+<div>
+    <h1 align="center"> Edit Product </h1>
+    <form action="#" th:action="@{/product/update}" th:object="${product}" method="post">
+
+        <div>
+            <table>
+                <td>
+                    <label for="productID"> ID: </label>
+                    <input readonly type="number" th:field="*{id}" id="productID">
+                </td>
+
+                <td>
+                    <label for="productName"> Name: </label>
+                    <input type="text" th:field="*{name}" id="productName">
+                </td>
+
+                <td>
+                    <label for="productDescription"> Description </label>
+                    <input type="text" th:field="*{description}" id="productDescription">
+                </td>
+
+                <td>
+                    <label for="productPrice"> Price </label>
+                    <input type="number" th:field="*{price}" id="productPrice">
+                </td>
+
+            </table>
+        </div>
+        <input type="submit" value="Edit">
+    </form>
+</div>
+
+
+</body>
+</html>

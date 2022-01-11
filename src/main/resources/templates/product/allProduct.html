@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Products</title>
+<!--    <link href="../../css/order_style.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<body>
+
+<div th:replace="header/header :: header"> </div>
+
+<!--<h2 align="center"> List Products </h2>-->
+<div class="container">
+    <h1 class="display-4" align="center">List Product</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th> ID </th>
+            <th> Name </th>
+            <th> Description </th>
+            <th> Price </th>
+            <th> Category </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each=" product : ${allProducts} ">
+            <td><a th:text="${product.getId()}"> ID </a></td>
+            <td><a th:text="${product.getName()}"> ProductName </a></td>
+            <td><a th:text="${product.getDescription()}"> Description </a></td>
+            <td><a th:text="${product.getPrice()}"> Price </a></td>
+            <td><a th:text="${product.getCategory()}"> Category </a></td>
+
+
+
+            <td>
+                <form th:method="post" th:action="@{/product/{id}(id=${product.getId()})}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+            <td>
+                <form th:method="get" th:action="@{/product/edit/{id}(id=${product.id})}" th:object="${product}">
+                    <input type="submit" value="Edit">
+                </form>
+            </td>
+
+            <td>
+                <form th:method="get" th:action="@{/basket/{id}(id=${product.getId()})}" >
+                    <input type="submit" value="Add to Basket">
+                </form>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <th>
+            <form th:method="GET" th:action="@{/}">
+                <input type="submit" value="Back">
+            </form>
+        </th>
+    </table>
+
+
+    <table>
+        <th>
+            <form th:method="GET" th:action="@{/product/allProduct"
+        </th>
+    </table>
+
+</div>
+<script src="bootstrap.bundle.min.js"></script>
+</body>
+</html>
