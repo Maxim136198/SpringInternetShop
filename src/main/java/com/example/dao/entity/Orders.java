@@ -1,5 +1,7 @@
 package com.example.dao.entity;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -7,6 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "orders")
+@Builder
 public class Orders {
 
     @Id
@@ -23,7 +26,7 @@ public class Orders {
     @Column(name = "purchase_price")
     private Double purchasePrice;
 
-    @OneToMany(mappedBy = "orderId")
+    @OneToMany(mappedBy = "order")
     private Set<Item> items;
 
 

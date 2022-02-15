@@ -2,6 +2,7 @@ package com.example.dao.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,16 +18,25 @@ public class Role {
     @Size(min = 3, max = 50)
     private String name;
 
-    @ManyToMany(mappedBy = "role")
-    private Set<User> users;
+    @ManyToMany(mappedBy = "role", fetch = FetchType.EAGER)
+    private List<User> users;
 
     public Role() {
     }
 
-    public Role(Long id, @Size(min = 3, max = 50) String name, Set<User> users) {
+    public Role(Long id, @Size(min = 3, max = 50) String name, List<User> users) {
         this.id = id;
         this.name = name;
         this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", users=" + users +
+                '}';
     }
 
     public Long getId() {
@@ -45,11 +55,11 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 
@@ -66,14 +76,5 @@ public class Role {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, users);
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", users=" + users +
-                '}';
     }
 }

@@ -1,27 +1,90 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 </head>
+
+<!--<script language="JavaScript" type="text/javascript">-->
+<!--    &lt;!&ndash;-->
+<!--    function linklist(what){-->
+<!--        var selectedopt=what.options[what.selectedIndex]-->
+<!--        if (document.getElementById && selectedopt.getAttribute("target")=="new")-->
+<!--            window.open(selectedopt.value)-->
+<!--        else-->
+<!--            window.location=selectedopt.value-->
+<!--    }-->
+<!--    &ndash;&gt;-->
+<!--</script>-->
+
 <body>
-<div th:replace="header/header :: header"> </div>
+<div th:replace="product/headerAllProduct :: header"></div>
 
-<h2 align="center"> List Products </h2>
-<div>
-    <table>
-        <th>
-<!--            <img th:src="@{/resources/static/img/phone.png}"/>-->
+<!--<h1 th:text="#{app.title}">Привет мой друг, <a th:text="${userName}"/></h1>-->
 
-<!--            <img src="../static/img/phone.png" height="200" width="200" th:src="@{img/phone.png}"/>-->
+<!--<div>-->
+<!--    <table>-->
+<!--        <th>-->
+<!--            <img class="rounded float-left" th:src="@{/images/1.png }" height="200" width="200"/>-->
+<!--            <img class="rounded float-right" th:src="phone.png" height="200" width="200"/>-->
 
-            <img th:src="web/phone.png" height="200" width="200"/>
+<!--            <a href="/product/header">Header Product</a>-->
+<!--        </th>-->
+<!--    </table>-->
+<!--</div>-->
 
-        </th>
-    </table>
+
+<div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+        <div class="col-lg-4">
+            <img class="rounded-circle"
+                 th:src="@{/images/1.png }"
+                 alt="Generic placeholder image" width="140" height="140">
+            <h2>Heading</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies
+                vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo
+                cursus magna.</p>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="rounded-circle"
+                 th:src="@{/images/1.png }"
+                 alt="Generic placeholder image" width="140" height="140">
+            <h2>Heading</h2>
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras
+                mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+                condimentum nibh.</p>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="rounded-circle"
+                 th:src="@{/images/1.png }"
+                 alt="Generic placeholder image" width="140" height="140">
+            <h2>Heading</h2>
+            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
+                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
+                fermentum massa justo sit amet risus.</p>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+    <!--<form name="menu">-->
+    <!--    <select name="sel" onChange="linklist(document.menu.sel)">-->
+    <!--        <option th:value = "#{header.form.language}"> Choose language </option>-->
+    <!--        <option th:value = "@{/(lang='en')}"> English </option>-->
+    <!--        <option th:value = "@{/(lang='de')}"> Deutsch </option>-->
+    <!--        <option th:value = "@{/(lang='ru')}"> Russian </option>-->
+    <!--    </select>-->
+    <!--</form>-->
+
 </div>
 
-</form>
+<div th:replace="product/headerAllProduct :: footer"></div>
 </body>
 </html>

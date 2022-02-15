@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!--    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/product/">-->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+
+<body>
+<header th:fragment="header" class="max-width: 100% p-3 bg-dark text-white hei">
+
+    <div class="max-width: 100% container">
+
+        <div class="d-flex justify-content-end justify-content-lg-start">
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 max-width: 100%">
+
+                <li><a th:href="@{/}" class="nav-link px-2 text-secondary"
+                       th:text="#{header.form.home}"> Home </a></li>
+
+                <li><a th:href="@{/user/allUsers}" class="nav-link px-2 text-white"
+                       th:text="#{header.form.listUser}"
+                       sec:authorize="hasRole('ROLE_ADMIN')"> List Users </a></li>
+
+                <li><a th:href="@{/role/allRoles}" class="nav-link px-2 text-white"
+                       th:text="#{header.form.listRoles}"
+                       sec:authorize="hasRole('ROLE_ADMIN')"> List Roles </a></li>
+
+                <li><a th:href="@{/user/newUser}" class="nav-link px-2 text-white"
+                       th:text="#{header.form.registrationUser}"> Registration User </a></li>
+
+                <li><a th:href="@{/role/newRole}" class="nav-link px-2 text-white"
+                       th:text="#{header.form.registrationRole}"
+                       sec:authorize="hasRole('ROLE_ADMIN')"> Registration Role </a></li>
+
+                <li><a th:href="@{/product/newProduct}" class="nav-link px-2 text-white"
+                       th:text="#{header.form.addProduct}"
+                       sec:authorize="hasRole('ROLE_ADMIN')"> Add Product </a></li>
+
+                <li><a th:href="@{/product/allProduct}" class="nav-link px-2 text-white"
+                       th:text="#{header.form.listProducts}">List Products</a></li>
+
+                <li><a th:href="@{/order/allOrders}" class="nav-link px-2 text-white"
+                       th:text="#{header.form.listOrders}">List Orders</a></li>
+            </ul>
+
+            <!--            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 float-right">-->
+            <!--                <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">-->
+            <!--            </form>-->
+
+
+            <!--            Button Login and Sign-up-->
+            <form class="px-2" th:method="GET" th:action="@{/user/login}">
+                <input type="submit" class="btn btn-warning" th:value="#{header.form.signIn}">
+            </form>
+
+            <form class="px-2" th:method="GET" th:action="@{/logout}">
+                <input type="submit" class="btn btn-outline-success" th:value="#{header.form.signOut}">
+            </form>
+
+            <form>
+                <a class="nav-link px-2 text-white" th:text="${userName}"/>
+            </form>
+
+
+            <!--Choose language-->
+            <form class="px-2" name="menu">
+                <select name="sel" onChange="linklist(document.menu.sel)">
+                    <option th:value="#{header.form.language}"> Choose language</option>
+                    <option th:value="@{/(lang='en')}"> English</option>
+                    <option th:value="@{/(lang='de')}"> Deutsch</option>
+                    <option th:value="@{/(lang='ru')}"> Russian</option>
+                </select>
+            </form>
+        </div>
+
+    </div>
+
+    <script language="JavaScript" type="text/javascript">
+        function linklist(what) {
+            var selectedopt = what.options[what.selectedIndex]
+            if (document.getElementById && selectedopt.getAttribute("target") == "new")
+                window.open(selectedopt.value)
+            else
+                window.location = selectedopt.value
+        }
+    </script>
+
+</header>
+
+
+<!--Footer -->
+<footer th:fragment="footer">
+
+    <style>
+        html {
+            position: relative;
+            min-height: 95%;
+        }
+
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 60px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 98%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            background-color: #f5f5f5;
+        }
+    </style>
+
+    <div class="container-fluid padding">
+        <div class="coll-12">
+            <footer class="footer">
+                <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+                </ul>
+                <p class="text-center text-muted">&copy; 2022 Zavadsky Maxim</p>
+            </footer>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

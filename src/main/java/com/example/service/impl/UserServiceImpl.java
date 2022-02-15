@@ -1,10 +1,18 @@
 package com.example.service.impl;
 
 
+import com.example.dao.entity.Product;
 import com.example.dao.entity.User;
 import com.example.dao.repository.UserRepository;
 import com.example.service.RoleService;
 import com.example.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -79,6 +87,24 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByName(name).orElseThrow(() -> new RuntimeException("error.user.name.notFound"));
     }
 
+    @Override
+    public User getUserName() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        String userLogin = userDetails.getUsername();
+
+        var user = userRepository.findByName(userLogin).orElseThrow(() -> new RuntimeException("User not found"));
+        return user;
+    }
+
+    @Override
+    public Page<User> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.userRepository.findAll(pageable);
+    }
 
 
     private void validate(boolean expression, String errorMessage) {

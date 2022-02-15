@@ -1,7 +1,9 @@
 package com.example.service;
 
 
+import com.example.dao.entity.Product;
 import com.example.dao.entity.Role;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -20,5 +22,7 @@ public interface RoleService {
     Role findById(Long id);
 
     Role findByName(String name);
+
+    Page<Role> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 }
 

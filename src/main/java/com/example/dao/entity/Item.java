@@ -1,26 +1,32 @@
 package com.example.dao.entity;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "item")
+@Builder
 public class Item {
 
 
     @EmbeddedId
     private ItemID id = new ItemID();
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+
     @ManyToOne
     @MapsId("orderId")
     @JoinColumn(name = "order_id", referencedColumnName = "id")
-    private Orders orderId;
-
+    private Orders order;
 
     @ManyToOne
     @MapsId("productId")
     @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private Product productId;
+    private Product product;
 
     @Column(name = "count")
     private int count;
@@ -28,11 +34,21 @@ public class Item {
     public Item() {
     }
 
-    public Item(ItemID id, Orders orderId, Product productId, int count) {
+    public Item(ItemID id, Orders order, Product product, int count) {
         this.id = id;
-        this.orderId = orderId;
-        this.productId = productId;
+        this.order = order;
+        this.product = product;
         this.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", order=" + order +
+                ", product=" + product +
+                ", count=" + count +
+                '}';
     }
 
     public ItemID getId() {
@@ -43,20 +59,20 @@ public class Item {
         this.id = id;
     }
 
-    public Orders getOrderId() {
-        return orderId;
+    public Orders getOrder() {
+        return order;
     }
 
-    public void setOrderId(Orders orderId) {
-        this.orderId = orderId;
+    public void setOrder(Orders order) {
+        this.order = order;
     }
 
-    public Product getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getCount() {
@@ -74,22 +90,12 @@ public class Item {
         Item item = (Item) o;
         return count == item.count &&
                 Objects.equals(id, item.id) &&
-                Objects.equals(orderId, item.orderId) &&
-                Objects.equals(productId, item.productId);
+                Objects.equals(order, item.order) &&
+                Objects.equals(product, item.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, orderId, productId, count);
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", orderId=" + orderId +
-                ", productId=" + productId +
-                ", count=" + count +
-                '}';
+        return Objects.hash(id, order, product, count);
     }
 }

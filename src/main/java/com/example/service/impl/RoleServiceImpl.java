@@ -1,9 +1,14 @@
 package com.example.service.impl;
 
 
+import com.example.dao.entity.Product;
 import com.example.dao.entity.Role;
 import com.example.dao.repository.RoleRepository;
 import com.example.service.RoleService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,6 +78,15 @@ public class RoleServiceImpl implements RoleService {
     public Role findByName(String name) {
 //        validate(!rolesRepository.existsByName(name),"error.user.name.notUnique" );
         return roleRepository.findByName(name).orElseThrow(()-> new RuntimeException("error.user.name.notFound"));
+    }
+
+    @Override
+    public Page<Role> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.roleRepository.findAll(pageable);
     }
 
 

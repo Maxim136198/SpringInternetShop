@@ -23,22 +23,23 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-//    @Column(name = "category")
-//    private String category;
+    @Column(name = "category")
+    private String category;
 
 
-    @OneToMany(mappedBy = "productId")
+    @OneToMany(mappedBy = "product")
     private Set<Item> items;
 
     public Product() {
     }
 
 
-    public Product(Long id, String name, String description, Double price, Set<Item> items) {
+    public Product(Long id, String name, String description, Double price, String category, Set<Item> items) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.category = category;
         this.items = items;
     }
 
@@ -74,12 +75,32 @@ public class Product {
         this.price = price;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public Set<Item> getItems() {
         return items;
     }
 
     public void setItems(Set<Item> items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", category='" + category + '\'' +
+                ", items=" + items +
+                '}';
     }
 
     @Override
@@ -91,22 +112,12 @@ public class Product {
                 Objects.equals(name, product.name) &&
                 Objects.equals(description, product.description) &&
                 Objects.equals(price, product.price) &&
+                Objects.equals(category, product.category) &&
                 Objects.equals(items, product.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, price, items);
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", items=" + items +
-                '}';
+        return Objects.hash(id, name, description, price, category, items);
     }
 }

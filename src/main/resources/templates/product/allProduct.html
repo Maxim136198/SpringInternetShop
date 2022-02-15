@@ -4,73 +4,86 @@
     <meta charset="UTF-8">
     <title>List Products</title>
 
-    <link rel="stylesheet" href="order_style.css">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
 </head>
 <body>
 
-<div th:replace="header/header :: header"> </div>
+<div th:replace="product/headerAllProduct :: header"></div>
 
 <!--<h2 align="center"> List Products </h2>-->
-<div class="container">
-    <h1 class="display-4" align="center">List Product??? Лист продуктов </h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th> ID </th>
-            <th> Name </th>
-            <th> Description </th>
-            <th> Price </th>
-            <th> Category </th>
+<div class="container my-2">
+    <h1 align="center" th:text="#{header.form.listProducts}"> Лист продуктов </h1>
+<!--    <form th:method="post" th:action="@{/product/allProduct}" th:object="${newProduct}">-->
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each=" product : ${allProducts} ">
-            <td><a th:text="${product.getId()}"> ID </a></td>
-            <td><a th:text="${product.getName()}"> ProductName </a></td>
-            <td><a th:text="${product.getDescription()}"> Description </a></td>
-            <td><a th:text="${product.getPrice()}"> Price </a></td>
-<!--            <td><a th:text="${product.getCategory()}"> Category </a></td>-->
+<!--        <td>-->
+<!--            <form th:method="post" th:action="@{/order/{userId}(userId=${user.getId()})}" th:object="${order}">-->
+<!--                <input type="submit" value="Create Order">-->
+<!--            </form>-->
+<!--        </td>-->
 
 
+        <table border="1" class = "table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th th:text="#{allProduct.table.id}"> ID</th>
+                <th th:text="#{allProduct.table.name}"> Name</th>
+                <th th:text="#{allProduct.table.Description}"> Description</th>
+                <th th:text="#{allProduct.table.Price}"> Price</th>
+                <th th:text="#{allProduct.table.Category}"> Category</th>
 
-            <td>
-                <form th:method="post" th:action="@{/product/{id}(id=${product.getId()})}">
-                    <input type="submit" value="Delete">
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each=" product : ${allProducts} ">
+                <td><a th:text="${product.getId()}"> ID </a></td>
+                <td><a th:text="${product.getName()}"> ProductName </a></td>
+                <td><a th:text="${product.getDescription()}"> Description </a></td>
+                <td><a th:text="${product.getPrice()}"> Price </a></td>
+                <td><a th:text="${product.getCategory()}"> Category </a></td>
+
+
+                <td>
+                    <form  th:method="post" th:action="@{/product/{id}(id=${product.getId()})}">
+                        <input class="btn btn-danger" type="submit" th:value="#{form.delete}">
+                    </form>
+                </td>
+                <td>
+                    <form th:method="get" th:action="@{/product/edit/{id}(id=${product.id})}" th:object="${product}">
+                        <input class="btn btn-primary" type="submit" th:value="#{form.edit}">
+                    </form>
+                </td>
+
+                <td>
+                    <form th:method="post" th:action="@{/order/{productId}(productId=${product.getId()})}">
+                        <input class="btn btn-primary" type="submit" th:value="#{form.addToBasket}">
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <th>
+                <form th:method="GET" th:action="@{/}">
+                    <input class="btn btn-secondary" type="submit" th:value="#{form.back}">
                 </form>
-            </td>
-            <td>
-                <form th:method="get" th:action="@{/product/edit/{id}(id=${product.id})}" th:object="${product}">
-                    <input type="submit" value="Edit">
+            </th>
+
+            <th>
+                <form th:method="GET" th:action="@{/order/basket}">
+                    <input class="btn btn-secondary" type="submit" value="Basket">
                 </form>
-            </td>
+            </th>
+        </table>
 
-            <td>
-                <form th:method="get" th:action="@{/basket/{id}(id=${product.getId()})}" >
-                    <input type="submit" value="Add to Basket">
-                </form>
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
-
-    <table>
-        <th>
-            <form th:method="GET" th:action="@{/}">
-                <input type="submit" value="Back">
-            </form>
-        </th>
-    </table>
-
-
-<!--    <table>-->
-<!--        <th>-->
-<!--            <form th:method="GET" th:action="@{/product/allProduct"-->
-<!--        </th>-->
-<!--    </table>-->
-
+    </form>
 </div>
-<script src="bootstrap.bundle.min.js"></script>
+
+<div th:replace="product/headerAllProduct :: footer"></div>
 </body>
 </html>

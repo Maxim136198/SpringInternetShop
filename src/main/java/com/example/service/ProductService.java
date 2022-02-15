@@ -3,6 +3,7 @@ package com.example.service;
 
 
 import com.example.dao.entity.Product;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -21,6 +22,8 @@ public interface ProductService {
     Product findById(Long id);
 
     Product findByName(String name);
+
+    Page <Product> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
 //    List<Product> findAllByCategory();
 }

@@ -2,14 +2,21 @@ package com.example.controller.impl;
 
 
 import com.example.controller.UserController;
+import com.example.dao.entity.Product;
 import com.example.dao.entity.User;
+import com.example.security.MyUserDetails;
+import com.example.security.MyUserDetailsService;
+import com.example.service.PaginatedService;
 import com.example.service.RoleService;
 import com.example.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -18,6 +25,10 @@ public class UserControllerImpl implements UserController {
     private UserService userService;
 
     private RoleService roleService;
+
+    private PaginatedService paginatedService;
+
+    private MyUserDetailsService myUserDetailsService;
 
     public UserControllerImpl(UserService userService, RoleService roleService) {
         this.userService = userService;
@@ -34,6 +45,8 @@ public class UserControllerImpl implements UserController {
     @GetMapping("/allUsers")
     public String getAllUser(Model model) {
         model.addAttribute("allUsers", userService.findAll());
+
+        findPaginated(1, "id", "asc", model);
 //        System.out.println("111 : list = {}", userService.findAll());
 
         return "user/allUsers";
@@ -76,8 +89,42 @@ public class UserControllerImpl implements UserController {
     @GetMapping("/login")
     public String userLogin(Model model){
         model.addAttribute("newUser", new User());
-        return "user/user-login";
+
+        return "user/login";
     }
+
+    @GetMapping("/{pageNo}")
+    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
+                                @RequestParam("sortField") String sortField,
+                                @RequestParam("sortDir") String sortDir,
+                                Model model) {
+        int pageSize = 5;
+
+        Page<User> page = userService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        List<User> listUsers = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+        model.addAttribute("allUsers", listUsers);
+        return "user/allUsers";
+    }
+
+//    @GetMapping("/test")
+//    public String enterUserData(User user){
+//        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication();
+//        Long usersId = userDetails.getId;
+//        System.err.println(usersId);
+//        user.getId();
+//
+//        user.getName();
+//        return "user/test";
+//    }
 
 
 

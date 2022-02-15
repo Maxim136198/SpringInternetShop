@@ -4,6 +4,10 @@ package com.example.service.impl;
 import com.example.dao.entity.Product;
 import com.example.dao.repository.ProductRepository;
 import com.example.service.ProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,6 +70,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findByName(String name) {
         return productRepository.findByName(name).orElseThrow(() -> new RuntimeException("error.product.name.notUnique"));
+    }
+
+    @Override
+    public Page<Product> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.productRepository.findAll(pageable);
     }
 
 //    @Override

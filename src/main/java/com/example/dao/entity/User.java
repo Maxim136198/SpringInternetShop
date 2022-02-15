@@ -1,7 +1,5 @@
 package com.example.dao.entity;
 
-
-
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -35,11 +33,10 @@ public class User {
     @Max(150)
     private Long age;
 
-    @ManyToMany
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> role;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}
+            , inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    private List<Role> role;
 
     @OneToMany(mappedBy = "customer")
     private List<Orders> orders;
@@ -47,7 +44,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, @Size(min = 3, max = 50) String name, @Size(min = 2, max = 50) String password, @Size(min = 6, max = 50) String email, @Min(1) @Max(50) Long age, Set<Role> role, List<Orders> orders) {
+    public User(Long id, @Size(min = 3, max = 50) String name, @Size(min = 2, max = 50) String password, @Size(min = 6, max = 50) String email, @Min(1) @Max(150) Long age, List<Role> role, List<Orders> orders) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -97,11 +94,11 @@ public class User {
         this.age = age;
     }
 
-    public Set<Role> getRole() {
+    public List<Role> getRole() {
         return role;
     }
 
-    public void setRole(Set<Role> role) {
+    public void setRole(List<Role> role) {
         this.role = role;
     }
 
@@ -111,6 +108,19 @@ public class User {
 
     public void setOrders(List<Orders> orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", role=" + role +
+                ", orders=" + orders +
+                '}';
     }
 
     @Override
@@ -130,18 +140,5 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, password, email, age, role, orders);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", role=" + role +
-                ", orders=" + orders +
-                '}';
     }
 }
