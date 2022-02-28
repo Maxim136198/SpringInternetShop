@@ -10,7 +10,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div th:replace="product/headerAllProduct :: header"></div>
+<div th:replace="header/mainHeader :: header"></div>
 <div>
     <h1 align="center"> Edit User </h1>
     <form action="#" th:action="@{/user/update}" th:object="${user}" method="post">
@@ -45,8 +45,7 @@
         <input type="submit" value="Edit">
     </form>
 </div>
-
-<div th:replace="product/headerAllProduct :: footer"></div>
+<div th:replace="header/mainHeader :: footer"></div>
 
 </body>
 </html>

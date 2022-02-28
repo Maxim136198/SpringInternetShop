@@ -2,7 +2,7 @@ package com.example.service.impl;
 
 
 import com.example.dao.entity.Item;
-import com.example.dao.entity.Orders;
+import com.example.dao.entity.Order;
 import com.example.dao.entity.User;
 import com.example.dao.repository.ItemRepository;
 import com.example.dao.repository.OrderRepository;
@@ -27,15 +27,12 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private  OrderRepository orderRepository;
-
     private  UserRepository userRepository;
-
     private  ItemRepository itemRepository;
-
     private  ProductRepository productRepository;
 
     @Override
-    public Orders save(Orders order) {
+    public Order save(Order order) {
         validate(order.getId() != 0, "error.order.notHaveId");
         return orderRepository.saveAndFlush(order);
     }
@@ -54,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Orders updateOrder(Orders order) {
+    public Order update(Order order) {
         final Long id = order.getId();
         validate(id == null, "error.order.haveId");
         findById(id);
@@ -62,12 +59,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Orders> findAll() {
+    public List<Order> findAllList() {
         return orderRepository.findAll();
     }
 
     @Override
-    public Orders findById(Long id) {
+    public Order findById(Long id) {
 
         return orderRepository.findById(id).orElseThrow(() -> new RuntimeException("order not found"));
     }
@@ -103,8 +100,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Orders createOrder(List<Item> listItem, User user){
-        Orders order = new Orders();
+    public Order createOrder(List<Item> listItem, User user){
+        Order order = new Order();
 
         order.setCustomer(user);
         order.setDateOfPurchase(LocalDateTime.now());
@@ -123,7 +120,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Page<Orders> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+    public Page<Order> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
                 Sort.by(sortField).descending();
 

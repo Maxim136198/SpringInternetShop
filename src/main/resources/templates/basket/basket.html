@@ -9,7 +9,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div th:replace="product/headerAllProduct :: header"></div>
+<div th:replace="header/mainHeader :: header"></div>
 
 <div class="container my-2">
     <h1 align="center"> Коризна </h1>
@@ -52,6 +52,6 @@
     </table>
 </div>
 
-
+<div th:replace="header/mainHeader :: footer"></div>
 </body>
 </html>

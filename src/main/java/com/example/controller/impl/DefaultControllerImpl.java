@@ -22,7 +22,6 @@ import java.security.Principal;
 public class DefaultControllerImpl {
 
     private ProductService productService;
-
     private OrderService orderService;
 
 //    @GetMapping("/{inpfilename}")

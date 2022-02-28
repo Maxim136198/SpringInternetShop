@@ -1,7 +1,6 @@
 package com.example.controller.impl;
 
 
-
 import com.example.controller.RoleController;
 import com.example.dao.entity.Role;
 import com.example.service.RoleService;
@@ -15,7 +14,7 @@ import javax.validation.Valid;
 @RequestMapping("/role")
 public class RoleControllerImpl implements RoleController {
 
-private RoleService roleService;
+    private RoleService roleService;
 
     public RoleControllerImpl(RoleService roleService) {
         this.roleService = roleService;

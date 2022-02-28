@@ -10,18 +10,13 @@ import java.util.Objects;
 @Builder
 public class Item {
 
-
     @EmbeddedId
     private ItemID id = new ItemID();
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     @ManyToOne
     @MapsId("orderId")
     @JoinColumn(name = "order_id", referencedColumnName = "id")
-    private Orders order;
+    private Order order;
 
     @ManyToOne
     @MapsId("productId")
@@ -34,7 +29,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(ItemID id, Orders order, Product product, int count) {
+    public Item(ItemID id, Order order, Product product, int count) {
         this.id = id;
         this.order = order;
         this.product = product;
@@ -59,11 +54,11 @@ public class Item {
         this.id = id;
     }
 
-    public Orders getOrder() {
+    public Order getOrder() {
         return order;
     }
 
-    public void setOrder(Orders order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 

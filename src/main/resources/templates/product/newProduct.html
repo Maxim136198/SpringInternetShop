@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<div th:replace="product/headerAllProduct :: header"></div>
+<div th:replace="header/mainHeader :: header"></div>
 <div>
     <h1 align="center" th:text="#{newProduct.addProduct}"> Add Product </h1>
     <form th:method="post" th:action="@{/product}" th:object="${newProduct}">
@@ -74,6 +74,6 @@
     </div>
 </div>
 
-<div th:replace="product/headerAllProduct :: footer"></div>
+<div th:replace="header/mainHeader :: footer"></div>
 </body>
 </html>

@@ -23,11 +23,8 @@ import java.util.List;
 public class UserControllerImpl implements UserController {
 
     private UserService userService;
-
     private RoleService roleService;
-
     private PaginatedService paginatedService;
-
     private MyUserDetailsService myUserDetailsService;
 
     public UserControllerImpl(UserService userService, RoleService roleService) {
@@ -35,20 +32,12 @@ public class UserControllerImpl implements UserController {
         this.roleService = roleService;
     }
 
-//    @GetMapping("/index")
-//    public String index(Model model) {
-//        model.addAttribute("user", userService.findAll());
-//        return "index";
-//    }
-
-
     @GetMapping("/allUsers")
     public String getAllUser(Model model) {
         model.addAttribute("allUsers", userService.findAll());
 
         findPaginated(1, "id", "asc", model);
 //        System.out.println("111 : list = {}", userService.findAll());
-
         return "user/allUsers";
     }
 
@@ -61,13 +50,11 @@ public class UserControllerImpl implements UserController {
     @GetMapping("/newUser")
     public String createUser(Model model) {
         model.addAttribute("newUser", new User());
-
         return "user/newUser";
     }
 
     @PostMapping()
     public String saveUser(@ModelAttribute("newUser") User user) {
-
         userService.save(user);
         return "redirect:/user/allUsers";
     }
@@ -87,14 +74,13 @@ public class UserControllerImpl implements UserController {
     }
 
     @GetMapping("/login")
-    public String userLogin(Model model){
+    public String userLogin(Model model) {
         model.addAttribute("newUser", new User());
-
         return "user/login";
     }
 
     @GetMapping("/{pageNo}")
-    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
                                 @RequestParam("sortField") String sortField,
                                 @RequestParam("sortDir") String sortDir,
                                 Model model) {
@@ -127,9 +113,8 @@ public class UserControllerImpl implements UserController {
 //    }
 
 
-
 //    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
-///-------------------------------------
+
 
 
 }

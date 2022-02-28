@@ -18,7 +18,6 @@ import java.util.List;
 public class ProductControllerImpl implements ProductController {
 
     private ProductService productService;
-
     private UserService userService;
 
     public ProductControllerImpl(ProductService productService, UserService userService) {
@@ -35,12 +34,6 @@ public class ProductControllerImpl implements ProductController {
         model.addAttribute("user", userService.getUserName());
         return "product/listProducts";
     }
-
-//    @GetMapping("/allProduct")
-//    public String getAllProductByCategory(Model model) {
-//        model.addAttribute("allProductsByCategory", productService.findAllByCategory());
-//        return "product/allProduct";
-//    }
 
 
     @PostMapping("/{id}")
@@ -101,8 +94,4 @@ public class ProductControllerImpl implements ProductController {
         return findPaginated(1, "id", "asc", model);
     }
 
-//    @GetMapping("/header")
-//    public String headerAllProduct (){
-//        return "product/headerAllProduct";
-//    }
 }

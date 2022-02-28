@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "orders")
 @Builder
-public class Orders {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +29,10 @@ public class Orders {
     @OneToMany(mappedBy = "order")
     private Set<Item> items;
 
-
-    public Orders() {
+    public Order() {
     }
 
-    public Orders(Long id, User customer, LocalDateTime dateOfPurchase, Double purchasePrice, Set<Item> items) {
+    public Order(Long id, User customer, LocalDateTime dateOfPurchase, Double purchasePrice, Set<Item> items) {
         this.id = id;
         this.customer = customer;
         this.dateOfPurchase = dateOfPurchase;
@@ -83,7 +82,7 @@ public class Orders {
 
     @Override
     public String toString() {
-        return "Orders{" +
+        return "Order{" +
                 "id=" + id +
                 ", customer=" + customer +
                 ", dateOfPurchase=" + dateOfPurchase +
@@ -96,12 +95,12 @@ public class Orders {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Orders orders = (Orders) o;
-        return Objects.equals(id, orders.id) &&
-                Objects.equals(customer, orders.customer) &&
-                Objects.equals(dateOfPurchase, orders.dateOfPurchase) &&
-                Objects.equals(purchasePrice, orders.purchasePrice) &&
-                Objects.equals(items, orders.items);
+        Order order = (Order) o;
+        return Objects.equals(id, order.id) &&
+                Objects.equals(customer, order.customer) &&
+                Objects.equals(dateOfPurchase, order.dateOfPurchase) &&
+                Objects.equals(purchasePrice, order.purchasePrice) &&
+                Objects.equals(items, order.items);
     }
 
     @Override
@@ -109,3 +108,5 @@ public class Orders {
         return Objects.hash(id, customer, dateOfPurchase, purchasePrice, items);
     }
 }
+
+

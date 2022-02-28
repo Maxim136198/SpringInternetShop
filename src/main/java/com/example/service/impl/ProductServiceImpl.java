@@ -17,7 +17,6 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-
     private ProductRepository productRepository;
 
     public ProductServiceImpl(ProductRepository productRepository) {
@@ -50,9 +49,12 @@ public class ProductServiceImpl implements ProductService {
     public Product updateProduct(Product product) {
         final Long id = product.getId();
         validate(id == null, "error.product.haveId");
+
         final Optional<Product> duplicateProduct = productRepository.findByName(product.getName());
         findById(id);
+
         final boolean isDuplicateExists = duplicateProduct.isPresent() && !Objects.equals(duplicateProduct.get().getId(), id);
+
         validate(isDuplicateExists, "error.product.name.notUnique");
         return productRepository.saveAndFlush(product);
     }
@@ -80,13 +82,6 @@ public class ProductServiceImpl implements ProductService {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return this.productRepository.findAll(pageable);
     }
-
-//    @Override
-//    public List<Product> findAllByCategory() {
-////        return productRepository.findAllByCategory();
-//        return null;
-//    }
-
 
     private void validate(boolean expression, String errorMessage) {
         if (expression) {

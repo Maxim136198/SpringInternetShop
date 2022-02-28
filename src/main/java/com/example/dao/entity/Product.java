@@ -33,7 +33,6 @@ public class Product {
     public Product() {
     }
 
-
     public Product(Long id, String name, String description, Double price, String category, Set<Item> items) {
         this.id = id;
         this.name = name;

@@ -10,7 +10,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div th:replace="product/headerAllProduct :: header"></div>
+<div th:replace="header/mainHeader :: header"></div>
 
 <h2 align="center" th:text="#{header.form.listUser}"> List Users </h2>
 
@@ -125,6 +125,6 @@
     </form>
 </div>
 
-<div th:replace="product/headerAllProduct :: footer"></div>
+<div th:replace="header/mainHeader :: footer"></div>
 </body>
 </html>

@@ -23,11 +23,8 @@ import java.util.List;
 public class OrderControllerImpl implements OrderController {
 
     private OrderService orderService;
-
     private UserService userService;
-
     private ProductService productService;
-
     private List<Item> itemList;
 
     public OrderControllerImpl(OrderService orderService, UserService userService, ProductService productService) {
@@ -40,10 +37,8 @@ public class OrderControllerImpl implements OrderController {
     public String getAllOrder(Model model) {
 //        orderService.createOrder(itemList, userService.getUserName().getId());
 
-
-        model.addAttribute("allOrders", orderService.findAll());
+        model.addAttribute("allOrders", orderService.findAllList());
         return "order/allOrder";
-
     }
 
     @Override
@@ -73,7 +68,6 @@ public class OrderControllerImpl implements OrderController {
 //        orderService.createOrder(itemList,userService.getUserName().getId());
 
         return "redirect:/product/allProduct";
-
     }
 
     @GetMapping("/basket")
@@ -87,7 +81,7 @@ public class OrderControllerImpl implements OrderController {
         String userLogin = principal.getName();
         User user = userService.findByName(userLogin);
 
-        Orders order = orderService.createOrder(itemList, user);
+        Order order = orderService.createOrder(itemList, user);
         model.addAttribute("order", order);
         return "basket/basket";
     }

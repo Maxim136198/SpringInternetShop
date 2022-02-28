@@ -6,7 +6,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -39,12 +38,12 @@ public class User {
     private List<Role> role;
 
     @OneToMany(mappedBy = "customer")
-    private List<Orders> orders;
+    private List<Order> orders;
 
     public User() {
     }
 
-    public User(Long id, @Size(min = 3, max = 50) String name, @Size(min = 2, max = 50) String password, @Size(min = 6, max = 50) String email, @Min(1) @Max(150) Long age, List<Role> role, List<Orders> orders) {
+    public User(Long id, @Size(min = 3, max = 50) String name, @Size(min = 2, max = 50) String password, @Size(min = 6, max = 50) String email, @Min(1) @Max(150) Long age, List<Role> role, List<Order> orders) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -102,11 +101,11 @@ public class User {
         this.role = role;
     }
 
-    public List<Orders> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Orders> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 
